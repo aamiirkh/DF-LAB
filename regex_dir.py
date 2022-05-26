@@ -1,17 +1,15 @@
 import argparse 
 import re
-import os   
+import os.path   
 
 def check_dir(file, regex):
 	if(os.path.isdir(file) == True):
 		directory = (os.listdir(file))
 		for directories in directory:
+			if(regex.search(file)):
+				print("File Found, Named = ", file)
 			file += "/" + directories
 			check_dir(file, regex)
-	else:
-		if(regex.search(file)):
-			print("File Found, Named = ", file)
-			exit(0)
 
 
 if __name__=="__main__":
