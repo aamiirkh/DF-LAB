@@ -14,6 +14,5 @@ while bytes:
 	bytes=source.read(arg.b)
 	sha256hash = hashlib.sha256(str(bytes).encode('utf-8'))
 	sha256hash.update(bytes)
-sha256hash.update(str(time.time()).encode())
 print(sha256hash.hexdigest())
 source.close()
