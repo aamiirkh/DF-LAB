@@ -2,6 +2,7 @@ import argparse
 import os.path
 import os
 import filecmp
+import hashlib
     			
 
 def CheckDir(dir1, dir2):
@@ -12,51 +13,21 @@ def CheckDir(dir1, dir2):
         if not CheckDir(os.path.join(dir1, subdir), os.path.join(dir2, subdir)):
             return False
     return True
-    
-    
-    
-def CheckFile(file1, file2):
-    if file1 != file2:
-    	return False
-    else:
-    	return True
-    	
-    	
-def Check_Dir_File(file, dir):
-	if(os.path.isdir(dir)==True):
-		if(os.listdir(dir)):
-			entry = os.listdir(dir)
-			for entries in entry:
-				if file == entries: 
-					return True
-				else:
-					Check_Dir_File(file, dir+'/'+entries)
-	return False
 
 
 if __name__=="__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('f1', help='path of first file')
-    parser.add_argument('f2', help='path of second file')
+    parser.add_argument('d1', help='path of first file')
+    parser.add_argument('d2', help='path of second file')
     args = parser.parse_args()
-    file1 = args.f1
-    file2 = args.f2
+    dir1 = args.d1
+    dir2 = args.d2
     
-    if os.path.isfile(file1) and os.path.isfile(file2):
-    	res = CheckFile(file1, file2)
-    	
-    elif os.path.isdir(file1) and os.path.isdir(file2):
-    	res = CheckDir(file1, file2)
-    	
-    else:
-    	if os.path.isfile(file1) and os.path.isdir(file2):
-    		res = Check_Dir_File(file1, file2)
-    	else:
-    		res = Check_Dir_File(file2, file1)	
+    if os.path.isdir(dir1) and os.path.isdir(dir2):
+    	res = CheckDir(dir1, dir2)
     		 			    	
     if (res):
         print("Same")
     else:
     	print("Not Same")
     
-
