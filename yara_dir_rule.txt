@@ -1,0 +1,9 @@
+rule match{
+
+	strings:
+		$a = "aamir"
+		
+	condition:
+		$a
+
+}
